@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+  crossorigin="anonymous"
+/>
+<link rel="stylesheet" href="../style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="https://cdn-icons.flaticon.com/png/512/477/premium/477420.png?token=exp=1655051858~hmac=8e4fa86d16d6faf71249f9d4781dda8e"/>
+    <title>Shop</title>
+</head>
+<body  class="bodyShopClient " >
+  <div class="bg-black">
+<h1 id="titleShopClient"  >SHOP</h1>
+<span class="hrShop"></span>
+  </div>
+
+
+<% if(productos.length){%> 
+        <div class="d-flex flex-row row ms-2 mb-5 ">
+        <% productos.forEach((producto ,key) => { %> 
+            <div class="card  m-5 cardProduct" style="width: 15rem;">
+              <img src="<%= producto.img %>" class=" cardImage"  width="150px" height="150px" alt="<%= producto.img %>" >
+                <div class="card-body   ">
+                  <a  class="aLinkToProduct "href="/api/productos/producto/<%= producto._id %>"><h5 class="card-title "><%= producto.titulo %></h5></a>
+                  <p class="  cardDescrption"><small ><%= producto.descripcion %></small></p>
+                 <div class="contentPriceAndCode">
+                  <p class="  cardPrice">$<%= producto.precio %> </p>
+                  <p class=" cardCode">ID : <%= producto.codigo %></p>
+                 
+                 </div>
+                  <a href="/api/carrito/add/<%= producto._id  %> " class="buttonAddToCart ">ADD TO CAR</a>
+                </div>
+              </div>
+             
+              <% }) %>
+              
+            </div>
+    
+    <% }else{  %> 
+      <div class=" ms-2 mb-5 ">
+        <h1 class="  text-dark dontProductText text-opacity-10">There are no products</h1>
+      </div>
+    <% } %> 
+
+   
+ 
+ 
+</body>
+</html>
