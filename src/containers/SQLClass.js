@@ -11,13 +11,11 @@ class SQLClass {
     await this.database.schema.hasTable(this.table).then(async (exists) => {
       if (!exists) {
         await this.database.schema.createTable(this.table, (table) => {
-          table.increments('id').primary()
+          table.increments("id");
           table.json("chat");
         });
-        
       }
     });
-  
   }
   async deleteChat() {
     await this.database.schema.dropTable(this.table);
@@ -38,10 +36,12 @@ class SQLClass {
         .from(this.table)
         .select("chat")
         .where("id", id);
-    
-      return one;
+
+      let onne = JSON.parse(one[0].chat);
+
+      return onne;
     } catch (error) {
-      throw new Error(err);
+      throw new Error(error, "getid");
     }
   }
 
@@ -55,14 +55,18 @@ class SQLClass {
   }
   async create(doc) {
     try {
-      await this.database(this.table).insert(doc);
+      await this.initChat()
+        .then(async () => {
+          await this.database(this.table).insert(doc);
+        })
+        .catch((err) => console.log((err = " No se pudo creear la tabla")));
     } catch (error) {
       throw new Error(error);
     }
   }
   async deleteById(id) {
     try {
-      await this.database.from(this.table).where("_id", id).del();
+      await this.database.from(this.table).where("id", id).del();
     } catch (error) {
       throw new Error(err);
     }
@@ -77,9 +81,11 @@ class SQLClass {
   }
   async updateById(id, doc) {
     try {
-      await this.database(this.table).where("id", id).update(doc);
+      await this.database(this.table)
+        .where("id", id)
+        .update({ chat: JSON.stringify(doc.chat) });
     } catch (error) {
-      throw new Error(err);
+      throw new Error(error, "updt");
     }
   }
 }

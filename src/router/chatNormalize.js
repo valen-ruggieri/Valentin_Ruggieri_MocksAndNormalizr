@@ -3,10 +3,11 @@ const routerNormalizr = express.Router();
 const { inspect } = require("util");
 const normalizr = require("normalizr");
 const SQLChat = require("../DAOs/chats/SQLChat");
+const chatDao = require("../DAOs/swicht");
 const normalize = normalizr.normalize;
 const denormalize = normalizr.denormalize;
 const schema = normalizr.schema;
-const chatDB = new SQLChat();
+
 const print = (obj) => {
   console.log(inspect(obj, false, 12, true));
 };
@@ -24,20 +25,22 @@ const messageSchema = new schema.Array({
 const chat = [];
 
 routerNormalizr.get("/chat", async (req, res) => {
-  if (chat.length > 0) {
-    const all = await chatDB.getById(1);
-    const allMap = JSON.parse(all[0].chat);
-    console.log(allMap);
-    const desChat = denormalize(allMap.result, messageSchema, allMap.entities);
-    await chatDB.initChat();
 
+  if (chat.length > 0) {
+    const allMap = await chatDao.getById(1)
+    const countCompression = Math.round((JSON.stringify(allMap).length / JSON.stringify(chat).length) * 100);
+    const desChat = denormalize(allMap.result, messageSchema, allMap.entities);
     const messages = desChat.map((entities) => ({
       ...entities.autor,
       ...entities.message,
     }));
-    return res.render("chatPage.ejs", { messages });
+  
+    return res.render("chatPage.ejs", { messages, countCompression });
   }
-  res.render("chatPage.ejs", { messages: "" });
+
+    
+   
+  res.render("chatPage.ejs", { messages: "", countCompression:0 });
 });
 
 routerNormalizr.post("/chat", async (req, res) => {
@@ -50,22 +53,19 @@ routerNormalizr.post("/chat", async (req, res) => {
     message: { id, text, date: dateNow },
   });
   const chatNormalize = normalize(chat, messageSchema);
-  console.log(JSON.stringify(chat).length);
-  console.log(JSON.stringify(chatNormalize).length);
-  console.log(
-    (JSON.stringify(chatNormalize).length / JSON.stringify(chat).length) * 100
-  );
+  const chatNormalizr = JSON.stringify(chatNormalize)
+if(chat.length == 1 ){await chatDao.create({ chat: chatNormalize, id:1 })}
+else{await chatDao.updateById(1, { chat: chatNormalize})}
 
-  const chatNormalzr = JSON.stringify(chatNormalize);
 
-  await chatDB.updateById(1, { chat: chatNormalzr });
+  
 
   res.redirect("/api/chat");
 });
 
 routerNormalizr.get("/chat/delete", async (req, res) => {
   chat.splice(0, chat.length);
-  await chatDB.updateById(1, { chat: "" });
+  await chatDao.deleteById(1);
 
   res.redirect("/api/chat");
 });

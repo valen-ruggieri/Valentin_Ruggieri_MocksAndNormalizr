@@ -9,7 +9,7 @@ routerMock.get("/productos-test", (req, res) => {
   for (let i = 0; i < 6; i++) {
     const randomProduct = faker.commerce.productName();
     const randomPrice = faker.commerce.price();
-    const randomImg = faker.image.imageUrl(480, 860, "", true);
+    const randomImg = faker.image.image(480, 860, true);
     const randomDescription = faker.commerce.productDescription();
     const randomCode = faker.random.alphaNumeric(4);
     productos.push({
