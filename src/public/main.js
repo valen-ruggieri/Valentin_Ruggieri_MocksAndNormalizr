@@ -28,9 +28,9 @@ inputAutor.addEventListener("keydown", () => {
     if (
       inputText.value.length > 4 &&
       inputApellido.value.length >= 6 &&
-      inputEdad.value.length >= 6 &&
-      inputAlias.value.length >= 6 &&
-      inputAvatar.value.length >= 6
+      inputEdad.value.length >= 2 &&
+      inputAlias.value.length >= 4 &&
+      inputAvatar.value.length >= 4
     ) {
       submit.setAttribute("class", " btn buttonSendMChat ");
 
@@ -68,9 +68,9 @@ inputApellido.addEventListener("keydown", () => {
     if (
       inputText.value.length > 4 &&
       inputAutor.value.length >= 6 &&
-      inputEdad.value.length >= 6 &&
-      inputAlias.value.length >= 6 &&
-      inputAvatar.value.length >= 6
+      inputEdad.value.length >= 2 &&
+      inputAlias.value.length >= 4 &&
+      inputAvatar.value.length >= 4
     ) {
       submit.setAttribute("class", " btn buttonSendMChat ");
 
@@ -97,7 +97,7 @@ inputApellido.addEventListener("keydown", () => {
 
 // edad
 inputEdad.addEventListener("keydown", () => {
-  if (inputEdad.value.length >= 6) {
+  if (inputEdad.value.length >= 2) {
     inputEdad.setAttribute("class", `border border-success border-2 inputChat`);
     validationEdad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-check2-circle text-success mb-1" viewBox="0 0 16 16">
      <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
@@ -108,14 +108,14 @@ inputEdad.addEventListener("keydown", () => {
       inputText.value.length > 4 &&
       inputAutor.value.length >= 6 &&
       inputApellido.value.length >= 6 &&
-      inputAlias.value.length >= 6 &&
-      inputAvatar.value.length >= 6
+      inputAlias.value.length >= 4 &&
+      inputAvatar.value.length >= 4
     ) {
       submit.setAttribute("class", " btn buttonSendMChat ");
 
       submit.removeAttribute("disabled");
     }
-  } else if (inputEdad.value.length < 6 && inputEdad.value.length > 0) {
+  } else if (inputEdad.value.length < 2 && inputEdad.value.length > 0) {
     inputEdad.setAttribute("class", `border border-danger border-2 inputChat`);
     validationEdad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle text-danger mb-1" viewBox="0 0 16 16">
      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -134,7 +134,7 @@ inputEdad.addEventListener("keydown", () => {
 //      alias
 
 inputAlias.addEventListener("keydown", () => {
-  if (inputAlias.value.length >= 6) {
+  if (inputAlias.value.length >= 4) {
     inputAlias.setAttribute(
       "class",
       `border border-success border-2 inputChat`
@@ -148,14 +148,14 @@ inputAlias.addEventListener("keydown", () => {
       inputText.value.length > 4 &&
       inputAutor.value.length >= 6 &&
       inputApellido.value.length >= 6 &&
-      inputEdad.value.length >= 6 &&
-      inputAvatar.value.length >= 6
+      inputEdad.value.length >= 2 &&
+      inputAvatar.value.length >= 4
     ) {
       submit.setAttribute("class", " btn buttonSendMChat ");
 
       submit.removeAttribute("disabled");
     }
-  } else if (inputAlias.value.length < 6 && inputAlias.value.length > 0) {
+  } else if (inputAlias.value.length < 4 && inputAlias.value.length > 0) {
     inputAlias.setAttribute("class", `border border-danger border-2 inputChat`);
     validationAlias.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle text-danger mb-1" viewBox="0 0 16 16">
      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -174,7 +174,7 @@ inputAlias.addEventListener("keydown", () => {
 //     avatar
 
 inputAvatar.addEventListener("keydown", () => {
-  if (inputAvatar.value.length >= 6) {
+  if (inputAvatar.value.length >= 4) {
     inputAvatar.setAttribute(
       "class",
       `border border-success border-2 inputChat`
@@ -188,14 +188,14 @@ inputAvatar.addEventListener("keydown", () => {
       inputText.value.length > 4 &&
       inputAutor.value.length >= 6 &&
       inputApellido.value.length >= 6 &&
-      inputEdad.value.length >= 6 &&
-      inputAlias.value.length >= 6
+      inputEdad.value.length >= 2 &&
+      inputAlias.value.length >= 4
     ) {
       submit.setAttribute("class", " btn buttonSendMChat ");
 
       submit.removeAttribute("disabled");
     }
-  } else if (inputAvatar.value.length < 6 && inputAvatar.value.length > 0) {
+  } else if (inputAvatar.value.length < 4 && inputAvatar.value.length > 0) {
     inputAvatar.setAttribute(
       "class",
       `border border-danger border-2 inputChat`
@@ -226,9 +226,9 @@ inputText.addEventListener("keydown", () => {
     if (
       inputAutor.value.length >= 6 &&
       inputApellido.value.length >= 6 &&
-      inputEdad.value.length >= 6 &&
-      inputAlias.value.length >= 6 &&
-      inputAvatar.value.length >= 6
+      inputEdad.value.length >= 2 &&
+      inputAlias.value.length >= 4 &&
+      inputAvatar.value.length >= 4
     ) {
       submit.setAttribute("class", " btn buttonSendMChat");
 
@@ -251,7 +251,14 @@ inputText.addEventListener("keydown", () => {
 });
 
 submit.addEventListener("dbclick", (event) => {
-  if (inputApellido.value.length >= 6 && inputText.value.length >= 4) {
+  if (
+    inputApellido.value.length >= 6 &&
+    inputText.value.length >= 4 &&
+    inputAutor.value.length >= 6 &&
+    inputEdad.value.length >= 2 &&
+    inputAlias.value.length >= 4 &&
+    inputAvatar.value.length >= 4
+  ) {
     inputText.setAttribute("class", `inputChat`);
     inputAutor.setAttribute("class", `inputChat`);
     inputApellido.setAttribute("class", `inputChat`);

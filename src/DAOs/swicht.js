@@ -2,7 +2,6 @@ require("dotenv").config();
 let chatDao;
 switch (process.env.DB_CONNECTION) {
   case "mongoDB":
-    
     const MongoDBChat = require("./chats/mongoDBChat");
     chatDao = new MongoDBChat();
     console.log("mongoDB active");
@@ -21,4 +20,4 @@ switch (process.env.DB_CONNECTION) {
     throw new Error("No se ha definido una conexión a la base de datos");
 }
 
-module.exports =  chatDao ;
+module.exports = chatDao;

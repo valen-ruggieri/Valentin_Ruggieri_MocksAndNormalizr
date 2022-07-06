@@ -20,15 +20,6 @@ class SQLClass {
   async deleteChat() {
     await this.database.schema.dropTable(this.table);
   }
-  async getAll() {
-    try {
-      const all = await this.database.from(this.table).select("*");
-
-      return all;
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
 
   async getById(id) {
     try {
@@ -41,25 +32,17 @@ class SQLClass {
 
       return onne;
     } catch (error) {
-      throw new Error(error, "getid");
+      throw new Error(error);
     }
   }
 
-  async countAll() {
-    try {
-      const all = await this.database.count().from(this.table);
-      return all[0]["count(*)"];
-    } catch (error) {
-      throw new Error(err);
-    }
-  }
   async create(doc) {
     try {
       await this.initChat()
         .then(async () => {
           await this.database(this.table).insert(doc);
         })
-        .catch((err) => console.log((err = " No se pudo creear la tabla")));
+        .catch((err) => console.log((err = " No se pudo creear la tabla/ Tabla ya existente")));
     } catch (error) {
       throw new Error(error);
     }
@@ -68,24 +51,17 @@ class SQLClass {
     try {
       await this.database.from(this.table).where("id", id).del();
     } catch (error) {
-      throw new Error(err);
-    }
-  }
-
-  async deleteAll() {
-    try {
-      await this.database(this.table).del();
-    } catch (error) {
       throw new Error(error);
     }
   }
+
   async updateById(id, doc) {
     try {
       await this.database(this.table)
         .where("id", id)
         .update({ chat: JSON.stringify(doc.chat) });
     } catch (error) {
-      throw new Error(error, "updt");
+      throw new Error(error);
     }
   }
 }
